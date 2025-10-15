@@ -168,7 +168,7 @@ def plot_train_movements(movements: TrainMovements, filename: str, network: Netw
     ax2.tick_params(axis="y", which="both", length=0)
 
     plt.tight_layout()
-    plt.savefig(filename)
+    plt.savefig("output/" + filename)
 
 
 def export_movements_to_csv(movements: TrainMovements, filename: str):
@@ -183,7 +183,7 @@ def export_movements_to_csv(movements: TrainMovements, filename: str):
                 }
             )
     df = pl.DataFrame(rows)
-    df.write_csv(filename)
+    df.write_csv("output/" + filename)
     print(f"Exported train movements to {filename}")
 
 

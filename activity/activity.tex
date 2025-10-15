@@ -12,7 +12,6 @@
 %
 %%%%%%%%%%%%%%%%%%%%
 
-\usepackage[utf8]{inputenc}
 \usepackage{siunitx}
 \sisetup{
 	group-separator = {,},
@@ -22,7 +21,6 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \graphicspath{{/figures}}
-\usepackage[acronym, nopostdot,nonumberlist]{glossaries}
 \usepackage{url}
 
 \usepackage{fancyhdr}
@@ -44,6 +42,7 @@
 % Glossary
 %
 %%%%%%%%%%%%%%%%%%%%
+\usepackage[nopostdot,nonumberlist]{glossaries}
 
 \makenoidxglossaries
 \renewcommand*{\glstextformat}[1]{\textbf{#1}}
@@ -80,6 +79,8 @@
 	\postdate{\end{flushleft}}
 
 \title{STEM Ambassadors: Train Planning Activity}
+\author{}
+\date{October, 2025}
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -108,7 +109,7 @@
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=\textwidth]{../train-generator/victoria.png}
+		\includegraphics[width=\textwidth]{../train-generator/output/victoria.png}
 		\caption{Train graph showing service patterns and station spacing on the Victoria line}
 		\label{fig:vic-train-graph}
 	\end{figure}
@@ -156,7 +157,7 @@
 		\label{tab:services}
 		\begin{tabular}{@{}lllll@{}}
 			\toprule
-			Train Type & Services per Hour & Velocity (\unit{\km \per \hour}) & Intermediate Stops & \Gls{dwell} (\unit{\minute}) \\ \midrule
+			Train Type & Services per Hour & Max Velocity (\unit{\km \per \hour}) & Intermediate Stops & \Gls{dwell} (\unit{\minute}) \\ \midrule
 			Express      & 2                 & 120      & D                  & 2.5                   \\
 			Local    & 2                 & 80       & All                & 7                     \\
 			Freight    & 1                 & 60       & None               &                       \\ \bottomrule
