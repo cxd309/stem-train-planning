@@ -94,6 +94,21 @@ def get_express_movement(departure: Minutes, network: Network) -> TrainMovement:
     )
 
 
+def get_express_delayed_movement(
+    departure: Minutes, network: Network, delay_stop: StationName, delay_time: Minutes
+) -> TrainMovement:
+    express_dwell: Minutes = 7.0
+    express_velocity: KMPH = 120.0
+    express_route: Route = [
+        Stop("D", express_dwell),
+        Stop(delay_stop, delay_time),
+        Stop("G", 0.0),
+    ]
+    return get_train_movement(
+        Timetable(express_route, "A", departure), express_velocity, network
+    )
+
+
 def get_local_movement(departure: Minutes, network: Network) -> TrainMovement:
     local_dwell: Minutes = 2.5
     local_velocity: KMPH = 80.0
@@ -192,7 +207,7 @@ def run_activity():
         "Express 1": get_express_movement(0, network),
         "Local 1": get_local_movement(5, network),
         "Local (extra)": get_local_movement(12.5, network),
-        "Express 2": get_express_movement(30, network),
+        "Express 2": get_express_delayed_movement(30, network, "F", 4),
         "Local 2": get_local_movement(35, network),
         "Freight 2": get_freight_movement(46, network),
         "Express start": get_express_movement(60, network),
@@ -201,14 +216,14 @@ def run_activity():
 
     # grouped spacing
     grouped_movements = {
-        "Express 1": get_express_movement(0, network),
+        "Express 1": get_express_delayed_movement(0, network, "E", 5),
         "Express 2": get_express_movement(12, network),
         "Freight": get_freight_movement(17, network),
         "Local 1": get_local_movement(23, network),
         "Local 2": get_local_movement(23 + 7.5, network),
         "Local 3": get_local_movement(23 + 2 * 7.5, network),
         "Local 4": get_local_movement(23 + 3 * 7.5, network),
-        "Express start": get_express_movement(60, network),
+        "Express start": get_express_delayed_movement(60, network, "E", 5),
     }
     plot_train_movements(grouped_movements, "activity-grouped.png", network)
 
