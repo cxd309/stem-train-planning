@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib
-from matplotlib.ticker import MultipleLocator, AutoMinorLocator
+from matplotlib.ticker import MultipleLocator
 import polars as pl
 from typing import Literal, List, Dict
 from dataclasses import dataclass
@@ -176,16 +176,41 @@ def run_activity():
     spacing: Kilometers = 5
     network = build_network(spacing)
 
-    movements = {
+    # even spacing
+    even_movements = {
         "Express 1": get_express_movement(0, network),
         "Local 1": get_local_movement(5, network),
         "Express 2": get_express_movement(30, network),
         "Local 2": get_local_movement(35, network),
-        "Freight 1": get_freight_movement(45, network),
+        "Freight 2": get_freight_movement(46, network),
+        "Express start": get_express_movement(60, network),
     }
+    plot_train_movements(even_movements, "activity-even.png", network)
 
-    plot_train_movements(movements, "activity.png", network)
-    export_movements_to_csv(movements, "activity.csv")
+    # even extra spacing
+    even_movements = {
+        "Express 1": get_express_movement(0, network),
+        "Local 1": get_local_movement(5, network),
+        "Local (extra)": get_local_movement(12.5, network),
+        "Express 2": get_express_movement(30, network),
+        "Local 2": get_local_movement(35, network),
+        "Freight 2": get_freight_movement(46, network),
+        "Express start": get_express_movement(60, network),
+    }
+    plot_train_movements(even_movements, "activity-even-extra.png", network)
+
+    # grouped spacing
+    grouped_movements = {
+        "Express 1": get_express_movement(0, network),
+        "Express 2": get_express_movement(12, network),
+        "Freight": get_freight_movement(17, network),
+        "Local 1": get_local_movement(23, network),
+        "Local 2": get_local_movement(23 + 7.5, network),
+        "Local 3": get_local_movement(23 + 2 * 7.5, network),
+        "Local 4": get_local_movement(23 + 3 * 7.5, network),
+        "Express start": get_express_movement(60, network),
+    }
+    plot_train_movements(grouped_movements, "activity-grouped.png", network)
 
 
 def run_figures():
@@ -233,8 +258,6 @@ def run_figures():
         movements[f"Metro {str(i)}"] = movement
 
     plot_train_movements(movements, "victoria.png", victoria_network)
-
-    export_movements_to_csv(movements, "victoria.csv")
 
 
 def main():
