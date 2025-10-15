@@ -1,0 +1,37 @@
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[backend=biber, style=numeric]{biblatex}
+\RequirePackage{caption} %allows caption formatting
+\RequirePackage{subcaption} %allows subfigures
+\RequirePackage{booktabs}
+
+% Settings
+\useinnertheme{uob}
+\useoutertheme{uob}
+\usecolortheme{uob}
+\usefonttheme{uob}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\newcommand{\bigNumberFrame}[2]{
+  \begin{frame}
+    \centering
+    % \usebeamercolor[fg]{title} % Use title color for consistency
+    % \usebeamerfont{title} % Use title font for styling
+    {\Huge #1} % The big number or text
+    \vskip1em
+    \textbf{\Large #2} % Subtitle or additional text
+  \end{frame}
+}
+
+\mode<all>

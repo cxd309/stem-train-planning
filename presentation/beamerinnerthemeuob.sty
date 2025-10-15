@@ -1,0 +1,116 @@
+\mode<presentation>
+
+\usepackage{calc}
+\usepackage{varwidth}
+\usetikzlibrary{intersections}
+
+% Title page
+\defbeamertemplate*{title page}{uob}[1][]
+{ 
+    \begin{tikzpicture}[remember picture, overlay]
+
+        \newlength{\mymargin}
+        \setlength{\mymargin}{0.5cm}
+
+        % Image height is 1373
+        % Height of red is ~940
+        % Ratio is therefore ~0.68
+        \newlength{\myimageheight}
+        \setlength{\myimageheight}{1.46\mymargin}
+        
+        \newlength{\myheight}
+        \setlength{\myheight}{\paperheight - 2\mymargin} % using 2\mymargin for subtraction
+        
+        \newlength{\mywidth}
+        \setlength{\mywidth}{\paperwidth - 2\mymargin}
+
+        \begin{scope}[shift={(current page.south west)}, xshift=\mymargin, yshift=\mymargin]
+
+            % Guides
+            % \draw [orange, line width=1pt] (0,0) -- (0,\myheight);
+            % \draw [orange, line width=1pt] (0.33\mywidth,0) -- (0.33\mywidth,\myheight);
+            % \draw [orange, line width=1pt] (0.67\mywidth,0) -- (0.67\mywidth,\myheight);
+            % \draw [orange, line width=1pt] (\mywidth,0) -- (\mywidth,\myheight);
+
+            % \draw [orange, line width=1pt] (0,0) -- (\mywidth,0);
+            % \draw [orange, line width=1pt] (0,0.33\myheight) -- (\mywidth,0.33\myheight);
+            % \draw [orange, line width=1pt] (0,0.67\myheight) -- (\mywidth,0.67\myheight);
+            % \draw [orange, line width=1pt] (0,\myheight) -- (\mywidth,\myheight);
+
+            % Lines of intent
+            \coordinate (center) at (\mywidth, 0.33\myheight);
+            % \coordinate (c1) at (105:30);
+            % \coordinate (c2) at (135:30);
+            % \coordinate (c3) at (195:0.67\mywidth);
+            % \coordinate (c4) at (225:30);
+            % \draw [white, line width=1pt] (center) -- ++(c1); % Line 1
+            % \draw [white, line width=1pt] (center) -- ++(c2); % Line 2
+            % \draw [white, line width=1pt] (center) -- ++(c3); % Line 2
+            % \draw [white, line width=1pt] (center) -- ++(c4); % Line 2
+
+            \node (logo) at (0,0) [
+                anchor=south west,
+                % inner sep=0pt, % Remove node padding
+                inner ysep=0em, % Adjust vertical padding
+                inner xsep=0.5cm,   % Set base padding for all sides
+                xshift=-0.5cm,      % Move the node to the right
+                outer sep=0pt,
+            ] {
+                \includegraphics[height=\myimageheight]{images/UoB.png}
+                % \includegraphics[width=0.22\mywidth]{UoB.png}\hspace{0.11\mywidth}
+            };
+
+            \node (author) at (0, 0.33\myheight) [
+                anchor=north west,
+                % draw=grey,
+                font=\fontsize{12}{14}\selectfont, 
+                text width=0.67\mywidth, 
+                inner xsep=0em, % Adjust horizontal padding
+                inner ysep=0.5em, % Adjust vertical padding
+                align=left,
+                % inner sep=0em,
+            ] {
+                \insertauthor
+            };
+            
+            \node (title) at (author.north west) [
+                anchor=south west,
+                % draw=grey,
+                font=\fontsize{20}{22}\selectfont, 
+                % text width=0.67\mywidth,
+                align=left,
+                % inner xsep=0em, % Adjust horizontal padding
+                inner ysep=0.5em, % Adjust vertical padding
+                inner xsep=0.5cm,   % Set base padding for all sides
+                xshift=-0.5cm,      % Move the node to the right
+            ] {
+                \begin{varwidth}{0.67\mywidth}
+                    \raggedright  % Align text to the left without justification
+                    \hyphenpenalty=10000  % Discourage hyphenation
+                    \exhyphenpenalty=10000 % Discourage explicit hyphenat
+                    \titlefont \inserttitle
+                \end{varwidth}
+            };
+
+            \coordinate (c1) at (0.88\mywidth, \myheight);
+            \coordinate (c2) at (0.67\mywidth, 0.67\myheight);
+            \coordinate (c3) at (0.33\mywidth, 0);
+            \coordinate (c4) at (0.77\mywidth, 0);
+
+            \draw [white, line width=1pt] (center) -- (c1); % Line 1
+            \draw [white, line width=1pt] (center) -- (title); % Line 2
+            \draw [white, line width=1pt] (center) -- (logo); % Line 2
+            \draw [white, line width=1pt] (center) -- (c4); % Line 2
+            
+        \end{scope}
+    
+    \end{tikzpicture}
+}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{items}[square]
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[default]
+
+\mode<all>
